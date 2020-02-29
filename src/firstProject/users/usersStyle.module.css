@@ -1,0 +1,11 @@
+.avatar img{
+    width: 100px;
+}
+
+.selectPage{
+    font-weight: bold;
+}
+
+.pageCount{
+    color: blueviolet;
+}
