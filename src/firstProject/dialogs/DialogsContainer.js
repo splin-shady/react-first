@@ -2,6 +2,7 @@ import Dialogs from './Dialogs';
 import {updateTextMessageCreator, addMessageCreator} from '../Redux/reducerDialogs';
 import {connect} from 'react-redux';
 import { withAuthRedirect} from '../hoc/AuthRedirect';
+import { compose } from 'redux';
 
 
 /*const DialogsConaine = (props) => {
@@ -30,7 +31,10 @@ let mapDispatchToProps = (dispatch) => {
         onTextMessageChangeContainer: (newTextMess) => dispatch(updateTextMessageCreator(newTextMess))
     }
 };
-const AuthRedirect = withAuthRedirect(Dialogs)
-const DialogsConainer = connect(mapStateToProps,mapDispatchToProps)(AuthRedirect);
+
+const DialogsConainer = compose(
+    withAuthRedirect,
+    connect(mapStateToProps,mapDispatchToProps)
+  )(Dialogs)
 
 export default DialogsConainer; 
