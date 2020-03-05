@@ -9,7 +9,7 @@ const Nav = () => {
 				<li><NavLink to='/profile'>PROFILE</NavLink></li>
 				<li><NavLink to='/dialogs'>MESSAGES</NavLink></li>
 				<li><NavLink to='/users'>USERS</NavLink></li>
-				<li><NavLink to='/profile'>MUSIC</NavLink></li>
+				<li><NavLink to='/login'>LOGIN</NavLink></li>
 				<li><NavLink to='/profile'>SETTINGS</NavLink></li>
 			</ul>
 		</nav>
