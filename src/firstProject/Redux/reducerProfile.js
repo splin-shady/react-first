@@ -1,7 +1,6 @@
 import { userApi, profileApi } from '../api/api';
 
 const ADD_POST = 'ADD_POST';
-const UPDATE_TEXT_POST = 'UPDATE_TEXT_POST';
 const DELETE_POST = 'DELETE_POST';
 const SET_USER_PROFILE ='SET_USER_PROFILE';
 const SET_STATUS = 'GET_STATUS';
@@ -13,7 +12,6 @@ let initialState = {
       {id : '3', postMess : 'хааххаах'},
       {id : '4', postMess : 'сори))'}
     ],
-    newTextPost : '',
     profile : null,
     status: ''
   }
@@ -22,20 +20,11 @@ const headerReduser = (state = initialState,action) => {
     let newState; 
     switch(action.type){        
         case ADD_POST:
-            let newPostMess = state.newTextPost;
             newState = {
                 ...state,
-                newTextPost : '',
-                post : [...state.post, {id : [...state.post].length + 1, postMess : newPostMess}]
+                post : [...state.post, {id : [...state.post].length + 1, postMess : action.value}]
             };
             newState.newTextPost = '';
-            return newState;
-
-        case UPDATE_TEXT_POST:
-            newState = {
-                ...state,
-                newTextPost : action.newText
-            };
             return newState;
 
         case DELETE_POST :
@@ -63,8 +52,7 @@ const headerReduser = (state = initialState,action) => {
 }
 
 export const deletePostActionCreator = (postId) => ({type: DELETE_POST, postId: postId});
-export const addPostCreator = () => ({type: ADD_POST});
-export const updateTextPostCreator = (text) => ({type: UPDATE_TEXT_POST, newText:text});
+export const addPostCreator = (value) => ({type: ADD_POST, value});
 export const setUserProfileAC = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setUserStatusAC = (status) => ({type: SET_STATUS, status});
 
