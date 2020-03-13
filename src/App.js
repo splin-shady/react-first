@@ -7,9 +7,19 @@ import ProfileContainer from './firstProject/profile/ProfileContainer'
 import UsersContainer from './firstProject/users/usersContainer'
 import { Route } from 'react-router-dom';
 import Login from './firstProject/login/Login';
+import { initializeAppTC } from './firstProject/Redux/reducerApp';
+import { connect } from 'react-redux';
+import Preloader from './firstProject/commenComponents/Preloader';
 
-function App(props) {
-  return (
+class App extends React.Component{
+
+  componentDidMount(){
+    this.props.initializeApp()    
+  }
+
+  render(){
+    if (!this.props.initialized) return <Preloader />
+    return (
       <div className="App">
         <HeaderContainer />
         <Nav />
@@ -20,7 +30,16 @@ function App(props) {
           <Route path='/login' render={ () => <Login />}/>
         </div>
       </div>
-  );
+    );
+  }
 }
 
-export default App; 
+let mapStateToProps = (state) => ({
+  initialized : state.app.initialized
+})
+
+let mapDispatchToProps = (dispatch) => ({
+  initializeApp : () => dispatch(initializeAppTC())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App); 

@@ -3,7 +3,7 @@ import Preloader from '../../commenComponents/Preloader';
 import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
-    if(!props.profile) return <Preloader />
+    if (!props.profile) return <Preloader />
     return (
         <div>
             <img src={props.profile.photos.large} alt=""/>
