@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './stylePost.module.css';
+import userPhoto from '../../../assets/images.png'
 
 const Post = (props) => {
 
@@ -10,7 +11,7 @@ const Post = (props) => {
 
     return (
         <div className={style.post}>
-            <img src='https://sun9-47.userapi.com/c855528/v855528829/1594a5/EUvwwvvU60E.jpg'></img>
+            <img src={userPhoto} alt='userPhoto'></img>
             <div className={style.text}>
                 {props.mess}
             </div>

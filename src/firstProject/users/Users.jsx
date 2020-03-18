@@ -2,6 +2,7 @@ import React from 'react';
 import style from './usersStyle.module.css';
 import { NavLink } from 'react-router-dom';
 import Paginator from './paginator/Paginator';
+import userPhoto from '../../assets/images.png'
 
 
 
@@ -16,7 +17,7 @@ const Users = (props) => {
                     <div>
                         <div className={style.avatar}>
                             <NavLink to={'/profile/'+ user.id}>
-                                <img src={user.photos.small} alt="userPhoto"/>
+                                <img src={user.photos.small || userPhoto} alt="userPhoto"/>
                             </NavLink>
                         </div>
                         <div>
