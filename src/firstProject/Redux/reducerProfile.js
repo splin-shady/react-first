@@ -4,6 +4,7 @@ const ADD_POST = 'ADD_POST';
 const DELETE_POST = 'DELETE_POST';
 const SET_USER_PROFILE ='SET_USER_PROFILE';
 const SET_STATUS = 'GET_STATUS';
+const SET_NEW_USER_PHOTO = 'SET_NEW_USER_PHOTO';
 
 let initialState = {
     post : [
@@ -46,6 +47,13 @@ const headerReduser = (state = initialState,action) => {
                 ...state,
                 status: action.status 
             }
+        
+        case SET_NEW_USER_PHOTO:
+            return {
+                ...state,
+                
+                profile: {...state.profile, photos: action.photo} 
+            }
 
         default: return state;    
     }
@@ -55,6 +63,7 @@ export const deletePostActionCreator = (postId) => ({type: DELETE_POST, postId: 
 export const addPostCreator = (value) => ({type: ADD_POST, value});
 export const setUserProfileAC = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setUserStatusAC = (status) => ({type: SET_STATUS, status});
+export const saveNewUserPhotoAC = (photo) => ({type: SET_NEW_USER_PHOTO, photo});
 
 
 export const getUserProfileTC = (userId) => (dispatch) =>{
@@ -72,6 +81,14 @@ export const updateUserStatusTC = (status) => (dispatch) =>{
     profileApi.updateStatus(status).then(response =>{ 
         if (response.data.resultCode === 0){
             dispatch(setUserStatusAC(status));
+        }
+    }); 
+}
+
+export const saveNewUserPhotoTC = (file) => (dispatch) =>{
+    profileApi.saveNewPhoto(file).then(response =>{ 
+        if (response.data.resultCode === 0){
+            dispatch( saveNewUserPhotoAC(response.data.data.photos));
         }
     }); 
 }
