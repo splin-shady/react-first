@@ -1,0 +1,19 @@
+.paginator{
+    border-bottom: 2px solid hotpink;;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rightLeftButton {
+    background-color: rgb(255, 121, 203);
+    width: 100px;
+    height: 30px;
+}
+
+.selectPage{
+    font-weight: bold;
+}
+
+.pageCount{
+    color: blueviolet;
+}

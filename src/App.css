@@ -1,0 +1,19 @@
+.App {
+  margin: 85px auto ;
+  /*background: hotpink;*/
+  width: 1120px;
+  display: grid; 
+  grid-template-areas: 
+    'h h'
+    'n j';
+  grid-template-rows: 120px 1fr;  
+  grid-template-columns: 2fr 10fr;
+  grid-row-gap: 85px;
+  grid-column-gap: 80px;
+}
+
+.Mes {
+  background: #f8f8f8; 
+  box-shadow: 0 0 10px 0 gray; 
+  grid-area: j;
+}
