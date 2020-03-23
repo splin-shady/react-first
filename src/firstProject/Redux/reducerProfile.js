@@ -1,4 +1,5 @@
 import { userApi, profileApi } from '../api/api';
+import { stopSubmit } from 'redux-form';
 
 const ADD_POST = 'ADD_POST';
 const DELETE_POST = 'DELETE_POST';
@@ -66,18 +67,17 @@ export const setUserStatusAC = (status) => ({type: SET_STATUS, status});
 export const saveNewUserPhotoAC = (photo) => ({type: SET_NEW_USER_PHOTO, photo});
 
 
-export const getUserProfileTC = (userId) => (dispatch) =>{
-    userApi.getProfile(userId).then(response =>{ 
-        dispatch(setUserProfileAC(response.data));        
-    }); 
+export const getUserProfile = (userId) => async (dispatch) =>{
+    const response = await userApi.getProfile(userId)
+    dispatch(setUserProfileAC(response.data)); 
 }
-export const getUserStatusTC = (userId) => (dispatch) =>{
+export const getUserStatus = (userId) => (dispatch) =>{
     profileApi.getStatus(userId).then(response =>{ 
         dispatch(setUserStatusAC(response.data));
     }); 
 }
 
-export const updateUserStatusTC = (status) => (dispatch) =>{
+export const updateUserStatus = (status) => (dispatch) =>{
     profileApi.updateStatus(status).then(response =>{ 
         if (response.data.resultCode === 0){
             dispatch(setUserStatusAC(status));
@@ -85,12 +85,23 @@ export const updateUserStatusTC = (status) => (dispatch) =>{
     }); 
 }
 
-export const saveNewUserPhotoTC = (file) => (dispatch) =>{
+export const saveNewUserPhoto = (file) => (dispatch) =>{
     profileApi.saveNewPhoto(file).then(response =>{ 
         if (response.data.resultCode === 0){
             dispatch( saveNewUserPhotoAC(response.data.data.photos));
         }
     }); 
+}
+
+export const saveProfile = (profile) => async (dispatch, getState) =>{
+    const response = await profileApi.saveProfile(profile)
+        
+    if (response.data.resultCode === 0){
+        dispatch(getUserProfile(getState().auth.userId))
+    } else {
+        dispatch(stopSubmit('editProfile', {_error: response.data.messages[0]}))
+        return Promise.reject(response.data.messages[0])
+    }    
 }
 
 export default headerReduser;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from './Profile';
-import {getUserProfileTC, getUserStatusTC, updateUserStatusTC, saveNewUserPhotoTC} from '../Redux/reducerProfile'
+import {getUserProfile, getUserStatus, updateUserStatus, saveNewUserPhoto, saveProfile} from '../Redux/reducerProfile'
 import { connect } from 'react-redux';
 import { withRouter} from 'react-router-dom';
 import { compose } from 'redux';
@@ -37,7 +37,8 @@ class ProfileContainer extends React.Component{
                          profile={this.props.profile}
                          updateUserStatus={this.props.updateUserStatus}
                          isOwner={!this.props.match.params.userId}
-                         aveNewUserPhoto={this.props.saveNewUserPhoto}/>
+                         aveNewUserPhoto={this.props.saveNewUserPhoto}
+                         saveProfile={this.props.saveProfile}/>
             </div>
         )
     }
@@ -52,17 +53,18 @@ let mapStateToProps = (state) => {
     };
 }
 
-let mapDispatchToProps = (dispatch) => {
+/*let mapDispatchToProps = (dispatch) => {
     return {
         getUserProfile: (userId) => {dispatch(getUserProfileTC(userId))},
         getUserStatus: (userId) => {dispatch(getUserStatusTC(userId))},
         updateUserStatus: (status) => {dispatch(updateUserStatusTC(status))},
-        saveNewUserPhoto: (file) => {dispatch(saveNewUserPhotoTC(file))}
+        saveNewUserPhoto: (file) => {dispatch(saveNewUserPhotoTC(file))},
+        saveProfile: (profile) => {dispatch(saveProfileTC(profile))}
     }
-}
+}*/
 
 export default compose(
     //withAuthRedirect,
     withRouter,
-    connect(mapStateToProps,mapDispatchToProps)
+    connect(mapStateToProps,{getUserProfile, getUserStatus, updateUserStatus, saveNewUserPhoto, saveProfile})
 )(ProfileContainer)

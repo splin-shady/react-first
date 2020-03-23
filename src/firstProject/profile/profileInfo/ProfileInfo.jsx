@@ -1,22 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Preloader from '../../commenComponents/Preloader';
 import ProfileStatusHook from './ProfileStatusHook';
 import userPhoto from '../../../assets/images.png'
+import ProfileAbout from './ProfileAbout'
+import ProfileAboutForm from './ProfileAboutForm'
 
-const ProfileInfo = (props) => {
-    if (!props.profile) return <Preloader />
+const ProfileInfo = ({saveProfile, profile, saveNewUserPhoto, isOwner, status, updateUserStatus}) => {
+
+    let [editMode, setEditMode] = useState(false)
+
+    if (!profile) return <Preloader />
 
     const onUserPhotoSelect = (event) =>{
         if(event.target.files.length){
-            props.saveNewUserPhoto(event.target.files[0])
+            saveNewUserPhoto(event.target.files[0])
         }
+    }
+
+    const onSubmit = (formData) =>{
+        saveProfile(formData).then(
+            ()=> {setEditMode(false)}
+        )
+        
     }
     
     return (
         <div>
-            <img src={props.profile.photos.large || userPhoto} alt="userPhoto"/>
-            {props.isOwner && <input type={'file'} onChange={onUserPhotoSelect}></input>}
-            <ProfileStatusHook status={props.status} updateUserStatus={props.updateUserStatus}/>
+            <img src={profile.photos.large || userPhoto} alt="userPhoto"/>
+            {isOwner && <input type={'file'} onChange={onUserPhotoSelect}></input>}
+            <ProfileStatusHook status={status} updateUserStatus={updateUserStatus}/>
+            {editMode 
+                ? <ProfileAboutForm initialValues={profile} profile={profile} onSubmit={onSubmit}/> 
+                : <ProfileAbout profile={profile} isOwner={isOwner} goToEditMode={() => {setEditMode(true)}}/>}
         </div>
     )
 }
