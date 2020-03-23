@@ -6,7 +6,7 @@ function Header(props) {
   console.log(props)
   return (
     <header className={style.head}>
-        <h1>sotiale network</h1>
+        <h1>soсiale network</h1>
         <div className={style.loginBlock}>
           {props.isAuth 
             ? <div> {props.login}  <button onClick={props.logout}>Log out</button></div>
