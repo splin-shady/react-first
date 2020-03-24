@@ -25,14 +25,14 @@ const ProfileAbout = ({ profile, isOwner, goToEditMode }) => {
 
             <div>
                 <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
-                    return <Contact key={key} title={key} value={profile.contacts[key]}/>
+                    return <Contact key={ key } title={ key } value={profile.contacts[key]}/>
                 })}
             </div>
         </div>
     )
 }
 
-const Contact = ({title, value}) => {
+const Contact = ({ title, value }) => {
     return (
         <div className={style.contact}>
             <b>{title}:</b>{value}
