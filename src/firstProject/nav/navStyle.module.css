@@ -1,0 +1,27 @@
+.nav {
+    background: #f8f8f8; 
+    box-shadow: 0 0 10px 0 gray;
+    grid-area: n;    
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    height: 300px;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+  margin-bottom: 25px;
+}
+ 
+a {
+  font-size: 16pt;
+  color: rgba(0, 0, 0, 255);
+  text-decoration: none;
+}
