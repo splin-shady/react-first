@@ -1,6 +1,5 @@
 import { getAuthUserDataTC } from './reducerAuth';
 
-
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
 let initialState = {
@@ -19,9 +18,9 @@ const appReduser = (state = initialState, action) => {
     }
 }
 
-export const initializedSuccessAC = () => ({type: INITIALIZED_SUCCESS});
+export const initializedSuccessAC = () => ({ type: INITIALIZED_SUCCESS });
 
-export const initializeAppTC = () => (dispatch) =>{
+export const initializeAppTC = () => (dispatch) => {
     dispatch(getAuthUserDataTC()).then(() => {
         dispatch(initializedSuccessAC())
     })

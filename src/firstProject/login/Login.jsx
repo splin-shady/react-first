@@ -1,7 +1,7 @@
 import React from 'react'
-import {Field, reduxForm} from 'redux-form'
-import {Input} from '../commenComponents/formControl/FormControl'
-import {reguired, maxLengthCreator} from '../validators/validators'
+import { Field, reduxForm } from 'redux-form'
+import { Input } from '../commenComponents/formControl/FormControl'
+import { reguired, maxLengthCreator } from '../validators/validators'
 import { connect } from 'react-redux'
 import { loginTC } from '../Redux/reducerAuth'
 import { Redirect } from 'react-router-dom';
@@ -29,10 +29,10 @@ const LoginForm = (props) => {
     )
 }
 
-const LoginReduxForm = reduxForm({form:'login'})(LoginForm)
+const LoginReduxForm = reduxForm({ form:'login' })(LoginForm)
 
 const Login = (props) => {
-    const onSubmit = (formData) =>{
+    const onSubmit = (formData) => {
         props.loginTC(formData.email, formData.password, formData.rememberMe)
     }
 
@@ -52,4 +52,4 @@ const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth
 })
 
-export default connect(mapStateToProps, {loginTC})(Login)
+export default connect(mapStateToProps, { loginTC })(Login)

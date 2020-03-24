@@ -24,21 +24,21 @@ class App extends React.Component{
         <HeaderContainer />
         <Nav />
         <div className="Mes">
-          <Route path='/dialogs' render={ () => <DialogsContainer />}/>
-          <Route path='/profile/:userId?' render={ () => <ProfileContainer />}/>
-          <Route path='/users' render={ () => <UsersContainer />}/>
-          <Route path='/login' render={ () => <Login />}/>
+          <Route path='/dialogs' render={()=><DialogsContainer />}/>
+          <Route path='/profile/:userId?' render={()=><ProfileContainer />}/>
+          <Route path='/users' render={()=><UsersContainer />}/>
+          <Route path='/login' render={()=><Login />}/>
         </div>
       </div>
     );
   }
 }
 
-let mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
   initialized : state.app.initialized
 })
 
-let mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   initializeApp : () => dispatch(initializeAppTC())
 })
 

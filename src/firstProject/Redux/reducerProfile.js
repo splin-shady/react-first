@@ -60,46 +60,45 @@ const headerReduser = (state = initialState,action) => {
     }
 }
 
-export const deletePostActionCreator = (postId) => ({type: DELETE_POST, postId: postId});
-export const addPostCreator = (value) => ({type: ADD_POST, value});
-export const setUserProfileAC = (profile) => ({type: SET_USER_PROFILE, profile});
-export const setUserStatusAC = (status) => ({type: SET_STATUS, status});
-export const saveNewUserPhotoAC = (photo) => ({type: SET_NEW_USER_PHOTO, photo});
+export const deletePostActionCreator = (postId) => ({ type: DELETE_POST, postId: postId });
+export const addPostCreator = (value) => ({ type: ADD_POST, value });
+export const setUserProfileAC = (profile) => ({ type: SET_USER_PROFILE, profile });
+export const setUserStatusAC = (status) => ({ type: SET_STATUS, status });
+export const saveNewUserPhotoAC = (photo) => ({ type: SET_NEW_USER_PHOTO, photo });
 
-
-export const getUserProfile = (userId) => async (dispatch) =>{
+export const getUserProfile = (userId) => async (dispatch) => {
     const response = await userApi.getProfile(userId)
     dispatch(setUserProfileAC(response.data)); 
 }
-export const getUserStatus = (userId) => (dispatch) =>{
-    profileApi.getStatus(userId).then(response =>{ 
+export const getUserStatus = (userId) => (dispatch) => {
+    profileApi.getStatus(userId).then(response => { 
         dispatch(setUserStatusAC(response.data));
     }); 
 }
 
-export const updateUserStatus = (status) => (dispatch) =>{
-    profileApi.updateStatus(status).then(response =>{ 
+export const updateUserStatus = (status) => (dispatch) => {
+    profileApi.updateStatus(status).then(response => { 
         if (response.data.resultCode === 0){
             dispatch(setUserStatusAC(status));
         }
     }); 
 }
 
-export const saveNewUserPhoto = (file) => (dispatch) =>{
-    profileApi.saveNewPhoto(file).then(response =>{ 
+export const saveNewUserPhoto = (file) => (dispatch) => {
+    profileApi.saveNewPhoto(file).then(response => { 
         if (response.data.resultCode === 0){
-            dispatch( saveNewUserPhotoAC(response.data.data.photos));
+            dispatch(saveNewUserPhotoAC(response.data.data.photos));
         }
     }); 
 }
 
-export const saveProfile = (profile) => async (dispatch, getState) =>{
+export const saveProfile = (profile) => async (dispatch, getState) => {
     const response = await profileApi.saveProfile(profile)
         
     if (response.data.resultCode === 0){
         dispatch(getUserProfile(getState().auth.userId))
     } else {
-        dispatch(stopSubmit('editProfile', {_error: response.data.messages[0]}))
+        dispatch(stopSubmit('editProfile', { _error: response.data.messages[0] }))
         return Promise.reject(response.data.messages[0])
     }    
 }

@@ -1,7 +1,6 @@
 import { authApi } from '../api/api';
 import { stopSubmit } from 'redux-form';
 
-
 const SET_USER_DATA = 'SET_USER_DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
@@ -33,9 +32,9 @@ const authReduser = (state = initialState, action) => {
 }
 
 export const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
-export const setAuthUserDataAC = (userId, email, login, isAuth) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth}});
+export const setAuthUserDataAC = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } });
 
-export const getAuthUserDataTC = () => (dispatch) =>{
+export const getAuthUserDataTC = () => (dispatch) => {
         return authApi.authMe()
             .then(response => { 
                 if(response.data.resultCode === 0) {
@@ -45,8 +44,8 @@ export const getAuthUserDataTC = () => (dispatch) =>{
             })
 }
 
-export const loginTC = (email, password, rememberMe) => (dispatch) =>{
-    authApi.login(email, password, rememberMe).then(response =>{ 
+export const loginTC = (email, password, rememberMe) => (dispatch) => {
+    authApi.login(email, password, rememberMe).then(response => { 
         if(response.data.resultCode === 0) {
             dispatch(getAuthUserDataTC())
         } else {
@@ -56,13 +55,12 @@ export const loginTC = (email, password, rememberMe) => (dispatch) =>{
     });    
 }
 
-export const logoutTC = () => (dispatch) =>{
-    authApi.logout().then(response =>{ 
+export const logoutTC = () => (dispatch) => {
+    authApi.logout().then(response => { 
         if(response.data.resultCode === 0) {
             dispatch(setAuthUserDataAC(null, null, null, false))
         }
     });    
 }
-
 
 export default authReduser;

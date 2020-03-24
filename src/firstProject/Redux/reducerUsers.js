@@ -73,18 +73,18 @@ const usersReduser = (state = initialState, action) => {
     }
 }
 
-export const followAC = (userId) => ({type: FOLLOW, userId: userId});
-export const unfollowAC = (userId) => ({type: UNFOLLOW, userId: userId});
-export const setUsersAC = (users) => ({type: SET_USERS, users: users});
-export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
-export const setTotalUsersCountAC = (totalCount) => ({type: SET_TOTAL_USERS_COUNT, totalCount: totalCount});
-export const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
-export const toggleIsFollowingAC = (isFollowing, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRES, isFollowing, userId});
+export const followAC = (userId) => ({ type: FOLLOW, userId: userId });
+export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId: userId });
+export const setUsersAC = (users) => ({ type: SET_USERS, users: users});
+export const setCurrentPageAC = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage: currentPage });
+export const setTotalUsersCountAC = (totalCount) => ({ type: SET_TOTAL_USERS_COUNT, totalCount: totalCount });
+export const toggleIsFetchingAC = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching: isFetching });
+export const toggleIsFollowingAC = (isFollowing, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRES, isFollowing, userId });
 
 export const getUsersThunkCreator = (currentPage, pageSize) => {
     return (dispatch) => {    
         dispatch(toggleIsFetchingAC(true));
-        userApi.getUsers(currentPage, pageSize).then(data =>{ 
+        userApi.getUsers(currentPage, pageSize).then(data => { 
             dispatch(toggleIsFetchingAC(false));              
             dispatch(setUsersAC(data.items));
             dispatch(setTotalUsersCountAC(data.totalCount));
@@ -95,7 +95,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
 export const followThunkCreator = (userId) => {
     return (dispatch) => {    
         dispatch(toggleIsFollowingAC(true, userId));                                      
-        userApi.follow(userId).then(response =>{ 
+        userApi.follow(userId).then(response => { 
             if (response.data.resultCode === 0) {dispatch(followAC(userId))}
             dispatch(toggleIsFollowingAC(false, userId));   
         });
@@ -105,12 +105,11 @@ export const followThunkCreator = (userId) => {
 export const unfollowThunkCreator = (userId) => {
     return (dispatch) => {    
         dispatch(toggleIsFollowingAC(true, userId));    
-        userApi.unfollow(userId).then(response =>{
+        userApi.unfollow(userId).then(response => {
             if (response.data.resultCode === 0) {dispatch(unfollowAC(userId))}
             dispatch(toggleIsFollowingAC(false, userId));  
         });
     }
 }
-
 
 export default usersReduser;
