@@ -2,28 +2,28 @@ import { getAuthUserDataTC } from './reducerAuth';
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
-let initialState = {
-    initialized : false
-  }
+const initialState = {
+  initialized: false,
+};
 
 const appReduser = (state = initialState, action) => {
-    switch(action.type){  
-        case INITIALIZED_SUCCESS: 
-            return {
-                ...state,
-                initialized: true
-                }
+  switch (action.type) {
+    case INITIALIZED_SUCCESS:
+      return {
+        ...state,
+        initialized: true,
+      };
 
-        default: return state;    
-    }
-}
+    default: return state;
+  }
+};
 
 export const initializedSuccessAC = () => ({ type: INITIALIZED_SUCCESS });
 
 export const initializeAppTC = () => (dispatch) => {
-    dispatch(getAuthUserDataTC()).then(() => {
-        dispatch(initializedSuccessAC())
-    })
-}
+  dispatch(getAuthUserDataTC()).then(() => {
+    dispatch(initializedSuccessAC());
+  });
+};
 
 export default appReduser;
