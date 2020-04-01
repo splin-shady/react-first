@@ -1,5 +1,4 @@
 const ADD_MESSAGE = 'ADD_MESSAGE';
-const UPDATE_TEXT_MESSAGE = 'UPDATE_TEXT_MESSAGE';
 
 let initialState = {
     dialogItemData : [
