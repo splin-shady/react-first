@@ -1,9 +1,9 @@
 import React from 'react'
 import style from './profileInfo.module.css'
-import {Field, reduxForm} from 'redux-form'
-import {Input, Textarea} from '../../commenComponents/formControl/FormControl'
+import { Field, reduxForm } from 'redux-form'
+import { Input, Textarea } from '../../commenComponents/formControl/FormControl'
 
-const ProfileAboutForm = ({handleSubmit, profile, error}) => {
+const ProfileAboutForm = ({ handleSubmit, profile, error }) => {
     return (
         <form onSubmit={handleSubmit}>  
             {error && <div className={style.stopSubmitError}>{error}</div>}          
@@ -27,7 +27,7 @@ const ProfileAboutForm = ({handleSubmit, profile, error}) => {
             </div>
 
             <div>
-                <b>Contacts:</b> {Object.keys(profile.contacts).map(key =>{
+                <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
                     return <div key={key} className={style.contact}>
                         <b>{key}: <Field component={Input} name={'contacts.'+key} placeholder={key}/></b>
                     </div>
@@ -39,6 +39,6 @@ const ProfileAboutForm = ({handleSubmit, profile, error}) => {
 }
 
 
-const ProfileAboutReduxForm = reduxForm({form:'editProfile'})(ProfileAboutForm)
+const ProfileAboutReduxForm = reduxForm({ form:'editProfile' })(ProfileAboutForm)
 
 export default ProfileAboutReduxForm;

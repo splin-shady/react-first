@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './styleProfile.module.css';
 import Post from './post';
-import {Field, reduxForm} from 'redux-form';
-import {reguired, maxLengthCreator} from '../../validators/validators'
-import {Textarea} from '../../commenComponents/formControl/FormControl'
+import { Field, reduxForm } from 'redux-form';
+import { reguired, maxLengthCreator } from '../../validators/validators'
+import { Textarea } from '../../commenComponents/formControl/FormControl'
 
 const Posts = (props) => {
   let postElement = props.state.post.map(item => <Post id={item.id} mess={item.postMess} deletePostContainer={props.deletePostContainer}/>); 
@@ -35,6 +35,6 @@ const AddPostForm = (props) => {
   )
 }
 
-const AddPostFormRedux = reduxForm({form: 'addPostForm'})(AddPostForm)
+const AddPostFormRedux = reduxForm({ form: 'addPostForm' })(AddPostForm)
 
 export default Posts;

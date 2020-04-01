@@ -2,11 +2,9 @@ import React from 'react';
 import style from './dialogs.module.css';
 import DialogItem from './dialogItem/DialogItem';
 import Messages from './messages/Messages';
-import { Redirect } from 'react-router-dom';
-import {Field, reduxForm} from 'redux-form'
-import {reguired, maxLengthCreator} from '../validators/validators'
-import {Textarea} from '../commenComponents/formControl/FormControl'
-
+import { Field, reduxForm } from 'redux-form'
+import { reguired, maxLengthCreator } from '../validators/validators'
+import { Textarea } from '../commenComponents/formControl/FormControl'
 
 const Dialogs = (props) => {
 
