@@ -16,11 +16,17 @@ const LoginForm = (props) => {
                 <Field validate={[reguired, maxLength30]} component={Input} name={'email'} placeholder={'login'}/>
             </div>
             <div>
-                <Field validate={[reguired, maxLength30]} component={Input} name={'password'} placeholder={'password'}/>
+                <Field validate={[reguired, maxLength30]} component={Input} name={'password'} placeholder={'password'} type={'password'}/>
             </div>
             <div>
                 <Field validate={[reguired, maxLength30]} component={Input} name={'rememberMe'} type={'checkbox'}/> remember me
             </div>
+
+            {props.captchaUrl && <img src={props.captchaUrl} />}
+            {props.captchaUrl && 
+              <Field component={Input} name={'captcha'} placeholder={'text from image'}/>
+            }
+
             {props.error && <div className={style.stopSubmitError}>{props.error}</div>}
             <div>
                 <button>login</button>
@@ -33,7 +39,7 @@ const LoginReduxForm = reduxForm({ form:'login' })(LoginForm)
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        props.loginTC(formData.email, formData.password, formData.rememberMe)
+        props.loginTC(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     if(props.isAuth) {
@@ -43,13 +49,14 @@ const Login = (props) => {
     return (
         <>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+          <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </>
     )
 }
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+  captchaUrl: state.auth.captchaUrl,
+  isAuth: state.auth.isAuth
 })
 
 export default connect(mapStateToProps, { loginTC })(Login)

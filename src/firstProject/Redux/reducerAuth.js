@@ -1,8 +1,9 @@
 import { stopSubmit } from 'redux-form';
-import { authApi } from '../api/api';
+import { authApi, securityApi } from '../api/api';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const GET_CAPTCHA_URL = 'GET_CAPTCHA_URL';
 
 const initialState = {
   userId: null,
@@ -10,6 +11,7 @@ const initialState = {
   login: null,
   isFetching: false,
   isAuth: false,
+  captchaUrl: null,
 };
 
 const authReduser = (state = initialState, action) => {
@@ -20,11 +22,16 @@ const authReduser = (state = initialState, action) => {
         ...action.data,
       };
 
-
     case TOGGLE_IS_FETCHING:
       return {
         ...state,
         isFetching: action.isFetching,
+      };
+
+    case GET_CAPTCHA_URL:
+      return {
+        ...state,
+        captchaUrl: action.captchaUrl,
       };
 
     default: return state;
@@ -39,6 +46,8 @@ export const setAuthUserDataAC = (userId, email, login, isAuth) => ({
   },
 });
 
+export const getCaptchaUrlAC = (captchaUrl) => ({ type: GET_CAPTCHA_URL, captchaUrl });
+
 export const getAuthUserDataTC = () => (dispatch) => authApi.authMe()
   .then((response) => {
     if (response.data.resultCode === 0) {
@@ -47,11 +56,14 @@ export const getAuthUserDataTC = () => (dispatch) => authApi.authMe()
     }
   });
 
-export const loginTC = (email, password, rememberMe) => (dispatch) => {
-  authApi.login(email, password, rememberMe).then((response) => {
+export const loginTC = (email, password, rememberMe, captcha) => (dispatch) => {
+  authApi.login(email, password, rememberMe, captcha).then((response) => {
     if (response.data.resultCode === 0) {
       dispatch(getAuthUserDataTC());
     } else {
+      if (response.data.resultCode === 10) {
+        dispatch(getCaptchaUrlTC())
+      }
       const messageError = response.data.messages[0];
       dispatch(stopSubmit('login', { _error: messageError }));
     }
@@ -63,6 +75,13 @@ export const logoutTC = () => (dispatch) => {
     if (response.data.resultCode === 0) {
       dispatch(setAuthUserDataAC(null, null, null, false));
     }
+  });
+};
+
+export const getCaptchaUrlTC = () => (dispatch) => {
+  securityApi.getCaptchaUrl().then((response) => {
+    const captchaUrl = response.data.url
+    dispatch(getCaptchaUrlAC(captchaUrl));
   });
 };
 
