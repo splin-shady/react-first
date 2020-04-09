@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {unfollowThunkCreator, setCurrentPageAC, toggleIsFollowingAC,
-        getUsersThunkCreator, followThunkCreator} from '../Redux/reducerUsers';
+import { unfollowThunkCreator, setCurrentPageAC, toggleIsFollowingAC,
+        getUsersThunkCreator, followThunkCreator } from '../Redux/reducerUsers';
 import Users from './Users';
 import Preloader from '../commenComponents/Preloader';
 
@@ -16,12 +16,9 @@ class UsersContainer extends React.Component {
                 this.props.setUsers(data.items);
                 this.props.setTotalUsersCount(data.totalCount);
             });*/
-    };
-    
+    };    
 
-    onPageChange = (currentPage) =>{ 
-        
-        
+    onPageChange = (currentPage) => {    
         this.props.setCurrentPage(currentPage);
         /*this.props.toggleIsFetching(true);
 

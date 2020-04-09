@@ -1,25 +1,25 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Preloader from '../../commenComponents/Preloader';
 import ProfileStatusHook from './ProfileStatusHook';
 import userPhoto from '../../../assets/images.png'
 import ProfileAbout from './ProfileAbout'
 import ProfileAboutForm from './ProfileAboutForm'
 
-const ProfileInfo = ({saveProfile, profile, saveNewUserPhoto, isOwner, status, updateUserStatus}) => {
+const ProfileInfo = ({ saveProfile, profile, saveNewUserPhoto, isOwner, status, updateUserStatus }) => {
 
     let [editMode, setEditMode] = useState(false)
 
     if (!profile) return <Preloader />
 
-    const onUserPhotoSelect = (event) =>{
+    const onUserPhotoSelect = (event) => {
         if(event.target.files.length){
             saveNewUserPhoto(event.target.files[0])
         }
     }
 
-    const onSubmit = (formData) =>{
+    const onSubmit = (formData) => {
         saveProfile(formData).then(
-            ()=> {setEditMode(false)}
+            () => {setEditMode(false)}
         )
         
     }

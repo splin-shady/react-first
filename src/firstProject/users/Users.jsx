@@ -4,10 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Paginator from './paginator/Paginator';
 import userPhoto from '../../assets/images.png'
 
-
-
 const Users = (props) => {
-
     
     return( 
             <div>
@@ -22,12 +19,12 @@ const Users = (props) => {
                         </div>
                         <div>
                             {user.followed
-                            ? <button disabled ={props.followingInProgres.some(id => id === user.id)} onClick={ () => {  
+                            ? <button disabled ={props.followingInProgres.some(id => id === user.id)} onClick={()=>{  
                                         props.unfollow(user.id)
                                     }
                                 }>Unfollow</button>
 
-                            : <button disabled ={props.followingInProgres.some(id => id === user.id)} onClick={ () => { 
+                            : <button disabled ={props.followingInProgres.some(id => id === user.id)} onClick={()=>{ 
                                         props.follow(user.id)
                                     }  
                                 }>Follow</button>}

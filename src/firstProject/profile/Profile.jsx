@@ -1,9 +1,6 @@
-import React from 'react';
-import ProfileInfo from './profileInfo/ProfileInfo';
-import PostsContainer from './posts/postsContainer';
-
-
-
+import React from 'react'
+import ProfileInfo from './profileInfo/ProfileInfo'
+import PostsContainer from './posts/postsContainer'
 
 const Profile = (props) => {
     return (
@@ -19,4 +16,4 @@ const Profile = (props) => {
     )
 }
 
-export default Profile;
+export default Profile
