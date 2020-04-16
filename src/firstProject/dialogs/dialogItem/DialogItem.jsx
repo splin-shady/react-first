@@ -1,10 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
 const DialogItem = (props) => {
+
+  const getSelectMessages = () => {
+    props.getMessages(props.id);
+    props.setSelectPage(props.id)
+  }
+
   return (
-    <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
-  )
-}
+    <span onClick={getSelectMessages}>{props.name}</span>
+  );
+};
 
 export default DialogItem;

@@ -17,3 +17,11 @@
     padding: 20px;
     grid-area: m;
 }
+
+.selectPage{
+    font-weight: bold;
+}
+
+.notSelectPage{
+    font-weight: normal;
+}

@@ -1,6 +1,5 @@
-import { userApi } from '../api/api';
+import { userApi, dialogsApi } from '../api/api';
 import { usersType } from '../types/types';
-import { type } from 'os';
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -142,6 +141,12 @@ export const unfollowThunkCreator = (userId: number) => (dispatch: any) => {
   userApi.unfollow(userId).then((response: any) => {
     if (response.data.resultCode === 0) { dispatch(unfollowAC(userId)); }
     dispatch(toggleIsFollowingAC(false, userId));
+  });
+};
+
+export const startDialog = (userId: number) => (dispatch: any) => {
+  dialogsApi.startDialog(userId).then((response: any) => {
+    if (response.data.resultCode === 0) {  }
   });
 };
 
