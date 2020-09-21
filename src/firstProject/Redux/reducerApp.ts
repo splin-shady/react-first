@@ -2,11 +2,15 @@ import { getAuthUserDataTC } from './reducerAuth';
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
-const initialState = {
+type initialStateType = {
+  initialized: boolean,
+};
+
+const initialState: initialStateType = {
   initialized: false,
 };
 
-const appReduser = (state = initialState, action) => {
+const appReduser = (state = initialState, action: any) => {
   switch (action.type) {
     case INITIALIZED_SUCCESS:
       return {
@@ -18,9 +22,13 @@ const appReduser = (state = initialState, action) => {
   }
 };
 
-export const initializedSuccessAC = () => ({ type: INITIALIZED_SUCCESS });
+type initializedSuccessACType = {
+  type: typeof INITIALIZED_SUCCESS 
+}
 
-export const initializeAppTC = () => (dispatch) => {
+export const initializedSuccessAC = ():initializedSuccessACType => ({ type: INITIALIZED_SUCCESS });
+
+export const initializeAppTC = () => (dispatch: any) => {
   dispatch(getAuthUserDataTC()).then(() => {
     dispatch(initializedSuccessAC());
   });

@@ -24,7 +24,6 @@ export const userApi = {
   },
 
   getProfile(userId) {
-    console.warn('Pleace use profileApi object');
     return profileApi.getProfile(userId);
   },
 };
@@ -62,11 +61,37 @@ export const authApi = {
     return instance.get('auth/me');
   },
 
-  login(email, password, rememberMe = false) {
-    return instance.post('auth/login', { email, password, rememberMe });
+  login(email, password, rememberMe = false, captcha = null) {
+    return instance.post('auth/login', {
+      email, password, rememberMe, captcha,
+    });
   },
 
   logout() {
     return instance.delete('auth/login');
+  },
+};
+
+export const securityApi = {
+  getCaptchaUrl() {
+    return instance.get('security/get-captcha-url');
+  },
+};
+
+export const dialogsApi = {
+  startDialog(userId) {
+    return instance.put(`dialogs/${userId}`);
+  },
+
+  getAllDialogs() {
+    return instance.get('/dialogs');
+  },
+
+  getMessages(userId) {
+    return instance.get(`/dialogs/${userId}/messages`);
+  },
+
+  sendMessage(userId, message) {
+    return instance.post(`/dialogs/${userId}/messages`, { message });
   },
 };

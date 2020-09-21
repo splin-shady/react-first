@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { unfollowThunkCreator, setCurrentPageAC, toggleIsFollowingAC,
-        getUsersThunkCreator, followThunkCreator } from '../Redux/reducerUsers';
+        getUsersThunkCreator, followThunkCreator, startDialog } from '../Redux/reducerUsers';
 import Users from './Users';
 import Preloader from '../commenComponents/Preloader';
 
@@ -40,7 +40,8 @@ class UsersContainer extends React.Component {
                     follow={this.props.follow}
                     users={this.props.users}
                     followingInProgres={this.props.followingInProgres}
-                    portionSize={this.props.portionSize}/>
+                    portionSize={this.props.portionSize}
+                    startDialog={this.props.startDialog}/>
                 </>      
     }
 }
@@ -63,7 +64,8 @@ let mapDispatchToProps = (dispatch) => {
         toggleIsFollowing: (isFollowing, usreId) => {dispatch(toggleIsFollowingAC(isFollowing, usreId))},
         getUsers: (currentPage, pageSize) => {dispatch(getUsersThunkCreator(currentPage, pageSize))},
         follow: (userId) => {dispatch(followThunkCreator(userId))},
-        unfollow: (userId) => {dispatch(unfollowThunkCreator(userId))}
+        unfollow: (userId) => {dispatch(unfollowThunkCreator(userId))},
+        startDialog: (userId) => {dispatch(startDialog(userId))}
     }
 }
 

@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import style from './Header.module.css';
 
 function Header(props) {
-  console.log(props);
   return (
     <header className={style.head}>
       <h1>soсiale network</h1>
